@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+          <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'mysite' %}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <title>Home</title>
+    <style>
+        table, td, tr, th{border:1px solid black; border-collapse:collapse}
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+
+
+    {% if user.is_authenticated %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="contaner-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand active" href="{% url 'home' %}">fing</a>
+        </div>
+        <!-- items-->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'owners' %}">owners</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">edit profile <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'change-password' %}">change password</a></li>
+                    <!--<li><a href="{% url 'edit-profile' %}">edit profile</a></li>-->
+
+                  </ul>
+                </li>
+                <li><a href="{% url 'questions' %}">questions</a></li>
+                <li><a href="{% url 'results' %}">Results</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout<span style="color:black">....</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <br><br><br>
+    <h2><p>hello</p>
+        <p>welcome {{ user.username }} {{ user.userprofilemodel.gender }}</p>
+
+
+    {% if user.username == "admin" %}
+    <a href="{% url 'questions-add' %}">questions add</a><br><br>
+        {% endif %}</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% else %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="contaner-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar2">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">fing</a>
+        </div>
+        <!-- items-->
+        <div class="collapse navbar-collapse" id="topNavBar2">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'owners' %}">owners</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'regist' %}"><span class="glyphicon glyphicon-registration-mark"></span> register </a></li>
+                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login<span style="color:black">....</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <center><br><br><h1>WELCOME TO FING</h1><br>
+        <img src="{{ 'static/mysite/images/home.png' }}" style="width:20%;height:10%;">
+        <!--<img src="http://assets-cdn.ekantipur.com/images/the-kathmandu-post-archive/ped/2014/20140407india-votes-600x0.jpg" alt="fing logo">
+   --> </center>
+
+    {% endif %}
+
+</body>
+</html>

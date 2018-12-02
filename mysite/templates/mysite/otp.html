@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>otp please</title>
+    {% if user.is_authenticated %}
+        <h1>{{user.username}}, you need to <a href="{% url 'logout' %}">logout</a> first, and then enter a new name in registration</h1>
+    {% else %}
+       {% if username=="" %}
+    <H1>yo cant view this page unless you have entered an email while <a href="{% url: 'regist' %}">registring</a></H1>
+        {% else %}
+        <h2>please enter the otp</h2>
+    <form method="POST">
+        <input type="number" required>
+
+    </form>
+        {% endif %}
+    {% endif %}
+</head>
+<body>
+
+</body>
+</html>

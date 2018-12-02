@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>fing: owners</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+          <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'mysite' %}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        font {
+    color: yellow;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+    </style>
+</head>
+<!--<body backgroung={{ 'static/mysite/images/sky-background.png' }}>-->
+<body background="https://img-new.cgtrader.com/items/704281/f7fa790dd2/aurora-borealis-3d-model-blend.png">
+{% if user.is_authenticated %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="contaner-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand active" href="{% url 'home' %}">fing</a>
+        </div>
+        <!-- items-->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'owners' %}">owners</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">edit profile <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'change-password' %}">change password</a></li>
+                    <li><a href="{% url 'edit-profile' %}">edit profile</a></li>
+                  </ul>
+                </li>
+                <li><a href="{% url 'questions' %}">questions</a></li>
+                <li><a href="{% url 'results' %}">Results</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout<span style="color:black">....</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% else %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="contaner-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar2">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}">fing</a>
+        </div>
+        <!-- items-->
+        <div class="collapse navbar-collapse" id="topNavBar2">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'owners' %}">owners</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'regist' %}"><span class="glyphicon glyphicon-registration-mark"></span> register </a></li>
+                <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login<span style="color:black">....</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    {% endif %}
+<br><br><br>
+<font color="yellow"><center><h1>ABOUT US</h1><h2>contributions of the owners in making this app</h2></center>
+<div width="90%">
+    <h3>1 : Jitesh : Authentication, Database, Hashing<br>
+    2 : harshita : Search(Whoosh), Visualization(Piechart), URL hacking<br>
+    3 : janhavi : Database, Add questions, Table filtering <br>
+    4 : parth : Search (Javascript),  data filtering (deadline check, result page),piechart<br>
+    5 : sandesh : Bootstrap, database, change password, Static<br>
+    6 : saurabh : Database(mapping), foreign keys, change of vote(1 user, 1 question, 1 response)</h3>
+
+</div>
+</font>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{% extends 'mysite/nav-login.html' %}
+
+{% block body %}
+    {% if user.username == "admin" %}
+
+
+             {% if error %}
+                {{ error }}
+             {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+                question <input type="text" name="question_text"><br><br>
+                category <select name="category">
+                    <option value="GENERAL">GENERAL</option>
+                  <option value="ACADEMICS">ACADEMICS</option>
+                  <option value="HOSTEL">HOSTEL</option>
+                <option value="SPORTS">SPORTS</option>
+                <option value="TIMETABLE">TIMETABLE</option>
+                <option value="EVENTS">EVENTS</option>
+                <option value="FESTIVAL">FESTIVAL</option>
+                <option value="TRIP">TRIP</option>
+                </select><br><br>
+                gender <select name="gender">
+                    <option value="A">All</option>
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select><br><br>
+                dead line <input type="date" name="dead_line"><br><br>
+                <button type="submit">write question</button>
+            </form>
+
+
+
+
+
+    {% else %}
+    <h1>sorry, you are not the admin, hence cant add any questions</h1>
+    {% endif %}
+{% endblock %}

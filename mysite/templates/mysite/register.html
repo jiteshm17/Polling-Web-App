@@ -1,0 +1,25 @@
+{% extends 'mysite/nav-logout.html' %}
+    {% block title %}register{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<h1>you need to <a href="{% url 'logout' %}">logout</a> first</h1>
+{% else %}
+    <form method="POST">
+        {% if error_message %}
+        <h4>{{ error_message }}</h4>
+        {% endif %}
+        {% csrf_token %} {{ form.as_p }}
+        age <input type="number" name="age" max = 150 min = 1><br><br>
+        gender <select name="gender">
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select><br><br>
+        retype password <input type="password" name="password2"><br>
+
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <br><a href="{% url 'login' %}">login?</a>
+{% endif %}
+{% endblock %}

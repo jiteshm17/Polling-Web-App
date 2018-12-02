@@ -1,0 +1,69 @@
+{% extends 'mysite/nav-login.html' %}
+    {% block title %}detail {{question.pk}}{% endblock %}
+
+    {% block body %}
+
+<div style="width:90%">
+    {% if queston.gender == user_gender or question.gender == "A" %}
+    <h3>question : {{ question.question_text }}  <br>dead line : {{ question.dead_line }}<br>category : {{ question.category }}<br>
+    category(gender) : {{ question.gender }}<br>
+    {% if message %}
+        <h3>{{ message }}</h3>
+    {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+           <h3> yes<input type="radio" value="1" name="choice">
+            no<input type="radio" value="2" name="choice">
+            confused<input type="radio" value="3" name="choice">
+            dont care<input type="radio" value="4" name="choice">
+           </h3>
+            <button type="submit" class="btn btn-primary">submit</button><br>
+            <h3>yes vote : {{ question.yes_vote }}<br>
+            no vote : {{ question.no_vote }}<br>
+            confused vote : {{ question.confused_vote }}<br>
+            dontcare vote : {{ question.dontcare_vote }}
+            </h3>
+        </form>
+    </h3>
+
+        <!--<div id = "container" style = "width: 550px; height: 400px; margin: 0 auto">
+          </div>
+          <script language = "JavaScript">
+             function drawChart() {
+                // Define the chart to be drawn.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Browser');
+                data.addColumn('number', 'Percentage');
+                data.addRows([
+                   ['yes', {{ yes }}],
+                   ['no', {{ no }}],
+                   ['confused', {{ confused }}],
+                   ['dont care', {{ dontcare }}]
+                ]);
+
+                // Set chart options
+                var options = {
+                   'title':'Browser market shares at a specific website, 2014',
+                   'width':550,
+                   'height':400,
+                   is3D:true
+                };
+
+                // Instantiate and draw the chart.
+                var chart = new google.visualization.PieChart(document.getElementById('container'));
+                chart.draw(data, options);
+             }
+             google.charts.setOnLoadCallback(drawChart);
+          </script>
+
+          -->
+
+
+
+    {% else %}
+    <h2>this question wasnt meant to be viewed by you, you cant view/vote/see result of this question</h2>
+    {% endif %}
+</div>
+
+{% endblock %}

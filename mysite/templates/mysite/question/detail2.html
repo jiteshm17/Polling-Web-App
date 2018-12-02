@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>detaail</title>
+    {% load staticfiles %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'mysite' %}">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        yes = {{ question.yes_vote }};
+        no = {{ question.no_vote }};
+        con = {{ question.confused_vote }};
+        dnt = {{ question.dontcare_vote }};
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['yes', yes],
+          ['no', no],
+          ['confused',con],
+          ['dont care', dnt]
+        ]);
+
+        var options = {
+          title: 'votes',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+    <style>
+        .navbar{border-radius:10px;}
+
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="contaner-fluid">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand active" href="{% url 'home' %}">fing</a>
+        </div>
+        <!-- items-->
+        <div class="collapse navbar-collapse" id="topNavBar">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'owners' %}">owners</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">edit profile <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{% url 'change-password' %}">change password</a></li>
+                    <li><a href="{% url 'edit-profile' %}">edit profile</a></li>
+
+                  </ul>
+                </li>
+
+                <li><a href="{% url 'results' %}">Results</a></li>
+                <li><a href="{% url 'questions' %}">Questions</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout<span style="color:black">....</span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br><br><br>
+<center>
+<div style="width:90%">
+    {% if queston.gender == user_gender or question.gender == "A" %}
+    <h2>{{ question.question_text }}  <br>{{ user_gender }}<br>{{ question.dead_line }}<br>{{ question.category }}<br>
+        {{ question.gender }}</h2>
+    {% if message %}
+        <h3>{{ message }}</h3>
+    {% endif %}
+    <h3>yes : {{ question.yes_vote }}
+    no : {{ question.no_vote }}
+    confused : {{ question.confused_vote }}
+    dontcare : {{ question.dontcare_vote }}
+    </h3>
+    <div id="piechart_3d" style="width:500px; height:500px;"></div>
+
+
+
+
+
+    {% else %}
+    <h2>this question wasnt meant to be viewed by you, you cant view/vote/see result of this question</h2>
+    {% endif %}
+</div>
+</center>
+</body>
+</html>

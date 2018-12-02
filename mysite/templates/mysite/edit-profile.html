@@ -1,0 +1,11 @@
+{% extends 'mysite/nav-login.html' %}
+    {% block title %}profile edit{% endblock %}
+
+    {% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        <h3>{{ form.as_p }}
+            <button type="submit">submit</button></h3>
+    </form>
+
+{% endblock %}
